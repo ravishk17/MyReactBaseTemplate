@@ -1,5 +1,7 @@
 import React from "react";
 import classes from "./Home.module.css";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 
 const Home = props => {
     return (
@@ -8,4 +10,17 @@ const Home = props => {
         </div>
     )
 }
-export default Home;
+
+const mapStateToProps = (state) => {
+    return {
+        authStatus: state.auth
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        authenticate: (email, password) => dispatch(actions.auth(email, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
